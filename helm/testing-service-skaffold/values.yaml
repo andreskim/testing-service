@@ -1,0 +1,17 @@
+# These values are for Skaffold deployment ONLY
+# Note additional nested level which shouldn't be present in helm directory:
+dpl-microservice-helm:
+  #
+  # These values are used with https://github.com/resideo/dpl-microservice-helm/ chart
+  # See repository for full list of available values
+  #
+  logging:
+    enabled: false
+
+  livenessProbe:
+    enabled: true
+    path: "/healthz"
+
+  readinessProbe:
+    enabled: true
+    path: "/readyz"

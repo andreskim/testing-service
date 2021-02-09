@@ -1,0 +1,14 @@
+apiVersion: v2
+name: testing-service-skaffold
+description: "Standard chart deployment with hack for Skaffold bug, see https://github.com/GoogleContainerTools/skaffold/issues/1665"
+
+version: 0.0.1-dev
+
+maintainers:
+  - name: CERES Team
+    email: DL-ProjectCeres@resideo.com
+
+dependencies:
+  - name: dpl-microservice-helm
+    version: 0.8.3
+    repository: https://ceresacr.azurecr.io/helm/v1/repo

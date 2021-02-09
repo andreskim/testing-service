@@ -1,0 +1,20 @@
+apiVersion: skaffold/v2beta8
+kind: Config
+build:
+  tagPolicy:
+    dateTime: {}
+  artifacts:
+    - image: greenqaacr.azurecr.io/testing-service
+      docker:
+        dockerfile: Dockerfile
+deploy:
+  helm:
+    releases:
+      - name: testing-service-skaffold
+        chartPath: helm/testing-service-skaffold
+        remote: false
+        namespace: engineering-portal
+        artifactOverrides:
+          dpl-microservice-helm.image: greenqaacr.azurecr.io/testing-service
+
+

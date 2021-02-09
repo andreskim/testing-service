@@ -1,0 +1,63 @@
+openapi: "3.0.0"
+info:
+  version: "0.1.0"
+  title: resideo
+paths:
+  /healthz:
+    description: "Health check"
+    get:
+      operationId: healthCheck
+      responses:
+        200:
+          description: Always replies if alive
+          content:
+            application/json:
+              schema:
+                type: string
+  /readyz:
+    description: "Readiness check"
+    get:
+      operationId: readyCheck
+      responses:
+        200:
+          description: "Ready or not - depends on access to Github and Keyvaults"
+          content:
+            application/json:
+              schema:
+                type: string
+        502:
+          description: testing-service is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /:
+    description: Echo endpoint
+    get:
+      operationId: getEcho
+      responses:
+        200:
+          description: Echoes request
+          content:
+            application/json:
+              schema:
+                type: string
+        502:
+          description: Git hook is unavailable
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
